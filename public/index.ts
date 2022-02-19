@@ -30,26 +30,17 @@ function change_search_box() {
 
     const word = (<HTMLInputElement>document.getElementById("target")).value
 
-    console.log("Title fullmatch")
-    for (const item of InternalState.paradocs.filter_records(word, true, true)) {
-        add_list(item)
-    }
-
-    console.log("Title any")
+    console.log("Title matches")
     for (const item of InternalState.paradocs.filter_records(word, false, true)) {
         add_list(item)
+        console.log(item)
     }
 
-    console.log("Tag fullmatch")
-    for (const item of InternalState.paradocs.filter_records(word, true, false, true)) {
-        add_list(item)
-    }
-
-    console.log("Tag any")
+    console.log("Tag matches")
     for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
         add_list(item)
+        console.log(item)
     }
-
 }
 
 function clear_list() {
