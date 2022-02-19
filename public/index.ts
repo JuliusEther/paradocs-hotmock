@@ -11,7 +11,7 @@ window.onload = function () {
         data_fetch()
     }
 
-    document.getElementById("target").onchange = () => {
+    document.getElementById("target").onkeyup = () => {
         change_search_box()
     }
 }
