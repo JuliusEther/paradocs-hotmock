@@ -4,6 +4,11 @@ class InternalState {
 InternalState.paradocs = null;
 window.onload = function () {
     console.log("Hello");
+    document.getElementById("data_source").onkeydown = (e) => {
+        if (e.key === "Enter") {
+            data_fetch();
+        }
+    };
     document.getElementById("fetch").onclick = () => {
         data_fetch();
     };
