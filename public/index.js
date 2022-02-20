@@ -15,6 +15,7 @@ function data_fetch() {
     InternalState.paradocs = new Paradocs.State();
     InternalState.paradocs.set_data_source(document.getElementById("data_source").value);
     InternalState.paradocs.fetch_data(() => {
+        change_search_box();
         console.log("fetch completed.");
     });
 }
