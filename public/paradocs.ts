@@ -93,5 +93,11 @@ export namespace Paradocs {
                 }
             }
         }
+
+        public * get_all_records() {
+            for (const item of this.data) {
+                yield item
+            }
+        }
     }
 }

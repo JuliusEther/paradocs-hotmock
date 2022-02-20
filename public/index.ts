@@ -30,14 +30,9 @@ function change_search_box() {
 
     const word = (<HTMLInputElement>document.getElementById("target")).value
 
-    console.log("Title matches")
-    for (const item of InternalState.paradocs.filter_records(word, false, true)) {
-        add_list(item)
-        console.log(item)
-    }
+    const items = (word === "" ? get_all_records() : get_filtered_records(word))
 
-    console.log("Tag matches")
-    for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
+    for (const item of items) {
         add_list(item)
         console.log(item)
     }
@@ -48,7 +43,7 @@ function clear_list() {
     table.innerHTML = ""
 }
 
-function insert_title(){
+function insert_title() {
     const table = (<HTMLTableElement>document.getElementById("result"))
     const header = table.insertRow(-1)
     header.insertCell(0).textContent = "Title"
@@ -62,5 +57,22 @@ function add_list(records: Paradocs.Record) {
     new_row.insertCell(0).textContent = records.Title
     new_row.insertCell(1).textContent = records.Tag.join(", ")
     new_row.insertCell(2).textContent = records.Description
+}
 
+function* get_all_records() {
+    for (const item of InternalState.paradocs.get_all_records()) {
+        yield item
+    }
+}
+
+function* get_filtered_records(word: string) {
+    console.log("Title matches")
+    for (const item of InternalState.paradocs.filter_records(word, false, true)) {
+        yield item
+    }
+
+    console.log("Tag matches")
+    for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
+        yield item
+    }
 }
