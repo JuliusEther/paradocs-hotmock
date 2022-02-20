@@ -42,7 +42,8 @@ export var Paradocs;
                 typeof record.ID === "string" &&
                 typeof record.Title === "string" &&
                 record.Tag instanceof Array &&
-                typeof record.Description === "string") {
+                typeof record.Description === "string" &&
+                typeof record.Link === "string") {
                 return record;
             }
             else {
@@ -75,6 +76,7 @@ export var Paradocs;
                         for (const tag of item.Tag) {
                             if (tag.match("^" + word + "$")) {
                                 yield item;
+                                break;
                             }
                         }
                     }
@@ -84,10 +86,16 @@ export var Paradocs;
                         for (const tag of item.Tag) {
                             if (tag.indexOf(word) !== -1) {
                                 yield item;
+                                break;
                             }
                         }
                     }
                 }
+            }
+        }
+        *get_all_records() {
+            for (const item of this.data) {
+                yield item;
             }
         }
     }

@@ -22,13 +22,11 @@ function change_search_box() {
     clear_list();
     insert_title();
     const word = document.getElementById("target").value;
-    console.log("Title any");
-    for (const item of InternalState.paradocs.filter_records(word, false, true)) {
+    const is_include_tag = document.getElementById("is_include_tag").checked;
+    const items = (word === "" ? get_all_records() : get_filtered_records(word, is_include_tag));
+    for (const item of items) {
         add_list(item);
-    }
-    console.log("Tag any");
-    for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
-        add_list(item);
+        console.log(item);
     }
 }
 function clear_list() {
@@ -45,8 +43,33 @@ function insert_title() {
 function add_list(records) {
     const target = document.getElementById("result").tBodies;
     const new_row = target[0].insertRow(-1);
-    new_row.insertCell(0).textContent = records.Title;
+    if (records.Link !== "") {
+        const anchor = document.createElement("a");
+        anchor.textContent = records.Title;
+        anchor.href = records.Link;
+        new_row.insertCell(0).appendChild(anchor);
+    }
+    else {
+        new_row.insertCell(0).textContent = records.Title;
+    }
     new_row.insertCell(1).textContent = records.Tag.join(", ");
     new_row.insertCell(2).textContent = records.Description;
+}
+function* get_all_records() {
+    for (const item of InternalState.paradocs.get_all_records()) {
+        yield item;
+    }
+}
+function* get_filtered_records(word, is_include_tag) {
+    console.log("Title matches");
+    for (const item of InternalState.paradocs.filter_records(word, false, true)) {
+        yield item;
+    }
+    if (is_include_tag) {
+        console.log("Tag matches");
+        for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
+            yield item;
+        }
+    }
 }
 //# sourceMappingURL=index.js.map
