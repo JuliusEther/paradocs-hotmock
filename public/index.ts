@@ -55,7 +55,14 @@ function insert_title() {
 function add_list(records: Paradocs.Record) {
     const target = (<HTMLTableElement>document.getElementById("result")).tBodies
     const new_row = target[0].insertRow(-1)
-    new_row.insertCell(0).textContent = records.Title
+    if (records.Link !== "") {
+        const anchor = document.createElement("a")
+        anchor.textContent = records.Title
+        anchor.href = records.Link
+        new_row.insertCell(0).appendChild(anchor)
+    } else {
+        new_row.insertCell(0).textContent = records.Title
+    }
     new_row.insertCell(1).textContent = records.Tag.join(", ")
     new_row.insertCell(2).textContent = records.Description
 }

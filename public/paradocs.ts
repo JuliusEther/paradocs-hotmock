@@ -4,6 +4,7 @@ export namespace Paradocs {
         Title: string
         Tag: Array<string>
         Description: string
+        Link: string
     }
 
     export class State {
@@ -43,7 +44,8 @@ export namespace Paradocs {
                 typeof record.ID === "string" &&
                 typeof record.Title === "string" &&
                 record.Tag instanceof Array &&
-                typeof record.Description === "string"
+                typeof record.Description === "string" &&
+                typeof record.Link === "string"
             ) {
                 return record
             } else {
