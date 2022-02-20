@@ -79,6 +79,7 @@ export namespace Paradocs {
                         for (const tag of item.Tag) {
                             if (tag.match("^" + word + "$")) {
                                 yield item
+                                break
                             }
                         }
                     }
@@ -87,6 +88,7 @@ export namespace Paradocs {
                         for (const tag of item.Tag) {
                             if (tag.indexOf(word) !== -1) {
                                 yield item
+                                break
                             }
                         }
                     }
