@@ -29,8 +29,9 @@ function change_search_box() {
     insert_title()
 
     const word = (<HTMLInputElement>document.getElementById("target")).value
+    const is_include_tag = (<HTMLInputElement>document.getElementById("is_include_tag")).checked
 
-    const items = (word === "" ? get_all_records() : get_filtered_records(word))
+    const items = (word === "" ? get_all_records() : get_filtered_records(word, is_include_tag))
 
     for (const item of items) {
         add_list(item)
@@ -65,14 +66,16 @@ function* get_all_records() {
     }
 }
 
-function* get_filtered_records(word: string) {
+function* get_filtered_records(word: string, is_include_tag: boolean) {
     console.log("Title matches")
     for (const item of InternalState.paradocs.filter_records(word, false, true)) {
         yield item
     }
 
-    console.log("Tag matches")
-    for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
-        yield item
+    if (is_include_tag){
+        console.log("Tag matches")
+        for (const item of InternalState.paradocs.filter_records(word, false, false, true)) {
+            yield item
+        }
     }
 }
