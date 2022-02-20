@@ -12,18 +12,30 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <div>
-        <span>DataSource</span><input type="text" id="data_source" placeholder="data.json" />
-        <button id="fetch">fetch</button>
-    </div>
-    <div>
-        <span>Keyword</span><input type="text" id="target" />
-        <input type="checkbox" id="is_include_tag" checked><span>including tags</span>
-    </div>
-    <div>
-        <table id="result">
-            
-        </table>
+    <div class="container">
+        <div>
+            <div class="input-group mb-3">
+                <input type="text" id="data_source" class="form-control" placeholder="input data source" />
+                <div class="input-group-append">
+                    <button id="fetch" class="btn btn-primary">fetch</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="target">Keyword</label>
+                <input type="text" id="target" class="form-control"/>
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" id="is_include_tag" class="form-check-input" checked>
+                <label class="form-check-label" for="is_include_tag">including tags</label>
+            </div>
+        </div>
+        <div>
+            <table id="result" class="table">
+                
+            </table>
+        </div>
     </div>
 </body>
 </html>
