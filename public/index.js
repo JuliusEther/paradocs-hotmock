@@ -59,7 +59,7 @@ function add_list(records) {
         new_row.insertCell(0).textContent = records.Title;
     }
     new_row.insertCell(1).textContent = records.Tag.join(", ");
-    new_row.insertCell(2).textContent = records.Description;
+    new_row.insertCell(2).innerText = records.Description;
 }
 function* get_all_records() {
     for (const item of InternalState.paradocs.get_all_records()) {
